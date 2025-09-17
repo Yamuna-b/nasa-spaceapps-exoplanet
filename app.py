@@ -47,22 +47,42 @@ st.markdown("""
 
 @st.cache_data
 def load_models_and_data(dataset_key: str, model_type: str = "rf"):
-    """Load trained model and preprocessors for selected dataset"""
-    try:
-        artifacts_dir = 'artifacts'
-        model_path = os.path.join(artifacts_dir, f"{dataset_key}_{model_type}_model.joblib")
-        label_path = os.path.join(artifacts_dir, f"{dataset_key}_label_encoder.joblib")
-        scaler_path = os.path.join(artifacts_dir, f"{dataset_key}_scaler.joblib")
-        metrics_path = os.path.join(artifacts_dir, f"{dataset_key}_metrics.joblib")
+    """Load trained model and preprocessors for selected dataset.
+    Falls back to RandomForest artifacts if the selected model artifacts are missing."""
+    artifacts_dir = 'artifacts'
+    # Preferred artifacts
+    preferred = {
+        'model': os.path.join(artifacts_dir, f"{dataset_key}_{model_type}_model.joblib"),
+        'metrics': os.path.join(artifacts_dir, f"{dataset_key}_metrics.joblib"),
+    }
+    # Common artifacts (shared across models)
+    label_path = os.path.join(artifacts_dir, f"{dataset_key}_label_encoder.joblib")
+    scaler_path = os.path.join(artifacts_dir, f"{dataset_key}_scaler.joblib")
 
+    # Try preferred first, else fall back to RF
+    model_path = preferred['model']
+    metrics_path = preferred['metrics']
+    if not os.path.exists(model_path) or not os.path.exists(metrics_path):
+        # Fallback
+        fallback_model_path = os.path.join(artifacts_dir, f"{dataset_key}_rf_model.joblib")
+        fallback_metrics_path = os.path.join(artifacts_dir, f"{dataset_key}_metrics.joblib")
+        if os.path.exists(fallback_model_path) and os.path.exists(fallback_metrics_path):
+            st.warning(f"Artifacts for '{dataset_key}' with model '{model_type}' not found. Using 'rf' model instead.")
+            model_path = fallback_model_path
+            metrics_path = fallback_metrics_path
+        else:
+            st.error(f"Artifacts not found for dataset '{dataset_key}'. Expected at: {model_path}")
+            st.info("Run preprocessing and training first. See README instructions.")
+            return None, None, None, None
+
+    try:
         model = joblib.load(model_path)
         label_encoder = joblib.load(label_path)
         feature_scaler = joblib.load(scaler_path)
         metrics = joblib.load(metrics_path)
         return model, label_encoder, feature_scaler, metrics
     except FileNotFoundError as e:
-        st.error(f"Artifacts not found for dataset '{dataset_key}': {e}")
-        st.info("Run preprocessing and training first. See README instructions.")
+        st.error(f"Missing artifact: {e}")
         return None, None, None, None
 
 def preprocess_user_data(data, feature_scaler, expected_features):
@@ -99,6 +119,10 @@ def main():
     if model is None:
         return
     
+    # Dynamic header
+    st.markdown(f"<h1 class=\"main-header\">Exoplanet Detection — {dataset_key.upper()} ({model_type.upper()})</h1>", unsafe_allow_html=True)
+    st.caption("Machine-learning classification of exoplanet candidates using NASA mission datasets.")
+
     # Sidebar
     st.sidebar.header("Navigation")
     page = st.sidebar.selectbox("Choose a page", [
@@ -127,7 +151,7 @@ def show_prediction_page(model, label_encoder, feature_scaler, metrics):
     with col2:
         st.metric("Cross-Validation", f"{metrics['cv_mean']:.1%}")
     with col3:
-        st.metric("Features Used", len(metrics['feature_importance']))
+        st.metric("Features Used", len(metrics.get('features', metrics['feature_importance'])))
     
     # File upload
     st.subheader("Upload Your Data")
@@ -301,28 +325,26 @@ def show_about_page():
     st.header("About This Project")
     
     st.write("""
-    ## 🪐 Exoplanet Detection with AI/ML
-    
-    This application uses machine learning to predict exoplanet candidates from NASA's Kepler Objects of Interest dataset.
-    
-    ### 🔬 Methodology
-    1. **Data Preprocessing**: Clean and normalize the Kepler KOI dataset
-    2. **Feature Selection**: Use key transit and orbital parameters
-    3. **Model Training**: Random Forest classifier with cross-validation
-    4. **Prediction**: Classify candidates as confirmed, candidate, or false positive
-    
-    ### 📊 Key Features
-    - **Interactive Prediction**: Upload your own candidate data
-    - **Model Performance**: View accuracy metrics and validation results
-    - **Feature Analysis**: Understand which parameters are most important
-    
-    ### 🎯 Target Classifications
-    - **CONFIRMED**: Verified exoplanet
-    - **CANDIDATE**: Potential exoplanet requiring further study
-    - **FALSE POSITIVE**: Not an exoplanet (stellar activity, etc.)
-    
-    ### 🚀 Built For
-    Researchers, students, and space enthusiasts interested in exoplanet discovery and data science.
+    ## Exoplanet Detection with AI/ML
+
+    This application implements the NASA Space Apps 2025 challenge "A World Away: Hunting for Exoplanets with AI".
+
+    - Mission datasets supported: Kepler, TESS, K2
+    - Goals: preprocess public datasets, train ML classifiers, and enable interactive predictions with clear metrics and explainability
+
+    ### Methodology
+    1. Data preprocessing per mission with column alias mapping and robust scaling
+    2. Feature selection emphasizing orbital period, planet radius, and transit descriptors
+    3. Model training (Random Forest, Logistic Regression) with cross-validation
+    4. Prediction and explainability (optional SHAP/LIME)
+
+    ### Target Classes
+    - CONFIRMED / CANDIDATE / FALSE POSITIVE (mission-specific labels are encoded)
+
+    ### Usage Tips
+    - Choose dataset and model in the left sidebar
+    - Upload a CSV that contains at least the features used in training (shown on the Feature Analysis page)
+    - Use the Explainability section on the prediction page to understand decisions
     """)
 
 if __name__ == "__main__":
