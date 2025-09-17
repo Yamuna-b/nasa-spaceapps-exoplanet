@@ -1,8 +1,3 @@
-# 🪐 Exoplanet Detection with AI/ML
-Here is a **ready-to-copy-paste professional README.md** (no emojis, with all standard sections) for your GitHub repository:
-
-***
-
 # nasa-spaceapps-exoplanet
 
 Streamlit app for exoplanet classification using NASA public datasets
