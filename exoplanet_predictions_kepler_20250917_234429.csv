@@ -1,0 +1,4 @@
+koi_period,koi_prad,koi_depth,koi_duration,Prediction,Confidence
+10.5,1.2,100,2.5,CANDIDATE,0.4
+365.25,0.8,500,6.0,CANDIDATE,0.435
+88.0,2.1,200,1.8,CANDIDATE,0.73

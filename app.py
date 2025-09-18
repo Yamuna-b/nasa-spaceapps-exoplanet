@@ -15,6 +15,7 @@ import io
 import base64
 from datetime import datetime
 from typing import List, Dict
+import streamlit.components.v1 as components
 try:
     import shap
 except ImportError:
@@ -51,6 +52,9 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+
+# Helper to create DOM anchors for the tour
+    
 
 @st.cache_data
 def load_models_and_data(dataset_key: str, model_type: str = "rf"):
@@ -215,14 +219,23 @@ def build_mapping_ui(data: pd.DataFrame, expected_features: list[str], dataset_k
     return data_mapped
 
 def main():
-    # Header
-    st.markdown('<h1 class="main-header">🪐 Exoplanet Detection with AI/ML</h1>', unsafe_allow_html=True)
-    st.markdown("**Predict exoplanet candidates using NASA's Kepler Objects of Interest dataset**")
-    
     # Sidebar dataset/model selection
     st.sidebar.header("Configuration")
     dataset_key = st.sidebar.selectbox("Dataset", ["kepler", "tess", "k2"], index=0)
-    model_type = st.sidebar.selectbox("Model", ["rf", "logreg"], index=0)
+    model_type = st.sidebar.selectbox("Model", ["rf", "logreg", "svm"], index=0)
+
+    
+
+    page = st.sidebar.selectbox("Choose a page", [
+        "Home & Prediction",
+        "Model Performance",
+        "Feature Analysis",
+        "Model Comparison",
+        "Hyperparameter Tuning",
+        "Biology Knowledge Engine",
+        "Air Quality Forecaster",
+        "About & References"
+    ])
 
     # Load artifacts
     model, label_encoder, feature_scaler, metrics = load_models_and_data(dataset_key, model_type)
@@ -230,42 +243,31 @@ def main():
     if model is None:
         return
     
-    # Dynamic header
+    # Dynamic header (single source of truth)
     st.markdown(f"<h1 class=\"main-header\">Exoplanet Detection — {dataset_key.upper()} ({model_type.upper()})</h1>", unsafe_allow_html=True)
     st.caption("Machine-learning classification of exoplanet candidates using NASA mission datasets.")
 
-    # Sidebar
-    st.sidebar.header("Navigation")
-    page = st.sidebar.selectbox("Choose a page", [
-        "🏠 Home & Prediction",
-        "📊 Model Performance",
-        "🔍 Feature Analysis",
-        "⚖️ Model Comparison",
-        "🎛️ Hyperparameter Tuning",
-        "🧬 Biology Knowledge Engine",
-        "🌍 Air Quality Forecaster",
-        "ℹ️ About & References"
-    ])
     
-    if page == "🏠 Home & Prediction":
+    if page == "Home & Prediction":
         show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_key)
-    elif page == "📊 Model Performance":
+    elif page == "Model Performance":
         show_performance_page(metrics, dataset_key, model_type)
-    elif page == "🔍 Feature Analysis":
+    elif page == "Feature Analysis":
         show_feature_analysis_page(metrics)
-    elif page == "⚖️ Model Comparison":
+    elif page == "Model Comparison":
         show_model_comparison_page(dataset_key)
-    elif page == "🎛️ Hyperparameter Tuning":
+    elif page == "Hyperparameter Tuning":
         show_hyperparameter_tuning_page(dataset_key)
-    elif page == "🧬 Biology Knowledge Engine":
+    elif page == "Biology Knowledge Engine":
         show_biology_knowledge_page()
-    elif page == "🌍 Air Quality Forecaster":
+    elif page == "Air Quality Forecaster":
         show_air_quality_page()
     else:
         show_about_page()
 
+
 def show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_key):
-    st.header("Exoplanet Prediction")
+    st.header("Home & Prediction")
     
     # Model info
     col1, col2, col3 = st.columns(3)
@@ -299,6 +301,16 @@ def show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_
         st.session_state.sample_data = sample_data
         uploaded_file = "sample"
     
+    # Initialize session state for persistent data
+    if 'prediction_data' not in st.session_state:
+        st.session_state.prediction_data = None
+    if 'prediction_results' not in st.session_state:
+        st.session_state.prediction_results = None
+    if 'processed_features' not in st.session_state:
+        st.session_state.processed_features = None
+    if 'scaled_data' not in st.session_state:
+        st.session_state.scaled_data = None
+
     if uploaded_file is not None:
         if uploaded_file == "sample":
             data = st.session_state.sample_data
@@ -330,6 +342,12 @@ def show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_
             results['Prediction'] = prediction_labels
             results['Confidence'] = np.max(prediction_proba, axis=1)
             
+            # Store in session state for persistence
+            st.session_state.prediction_data = data
+            st.session_state.prediction_results = results
+            st.session_state.processed_features = data_features
+            st.session_state.scaled_data = data_scaled
+            
             # Display results
             st.subheader("Prediction Results")
             
@@ -353,7 +371,7 @@ def show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_
                 csv_data = csv_buffer.getvalue()
                 
                 st.download_button(
-                    label="📥 Download Predictions as CSV",
+                    label="Download Predictions as CSV",
                     data=csv_data,
                     file_name=f"exoplanet_predictions_{dataset_key}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                     mime="text/csv"
@@ -375,45 +393,123 @@ def show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_
             fig.update_layout(showlegend=True)
             st.plotly_chart(fig, use_container_width=True)
 
-            st.subheader("Explainability (optional)")
-            explain_choice = st.selectbox("Method", ["None", "SHAP", "LIME"], index=0)
-            if explain_choice == "SHAP":
-                if shap is None:
-                    st.warning("SHAP not installed. Add it in requirements and reinstall.")
-                else:
-                    try:
-                        # Use TreeExplainer when available
-                        explainer = shap.TreeExplainer(model) if hasattr(model, 'estimators_') else shap.Explainer(model)
-                        shap_values = explainer(data_scaled)
-                        st.write("Global feature importance (SHAP):")
-                        shap.summary_plot(shap_values, data_features, plot_type="bar", show=False)
-                        st.pyplot(plt.gcf())
-                        plt.clf()
-                    except Exception as e:
-                        st.info(f"SHAP explanation not available: {e}")
-            elif explain_choice == "LIME":
-                if LimeTabularExplainer is None:
-                    st.warning("LIME not installed. Add it in requirements and reinstall.")
-                else:
-                    try:
-                        explainer = LimeTabularExplainer(
-                            training_data=data_features.values,
-                            feature_names=list(data_features.columns),
-                            class_names=list(label_encoder.classes_),
-                            mode='classification'
-                        )
-                        # Explain first row as an example
-                        exp = explainer.explain_instance(
-                            data_features.values[0],
-                            model.predict_proba
-                        )
-                        st.write("LIME explanation for first row:")
-                        st.components.v1.html(exp.as_html(), height=400, scrolling=True)
-                    except Exception as e:
-                        st.info(f"LIME explanation not available: {e}")
-            
         except Exception as e:
             st.error(f"Error processing data: {e}")
+    
+    # Show results and explainability if data exists in session state
+    if st.session_state.prediction_results is not None:
+        results = st.session_state.prediction_results
+        data_features = st.session_state.processed_features
+        data_scaled = st.session_state.scaled_data
+        
+        # Display results if not already shown above
+        if uploaded_file is None:
+            st.subheader("Prediction Results")
+            
+            # Summary
+            prediction_counts = results['Prediction'].value_counts()
+            col1, col2, col3 = st.columns(3)
+            
+            for i, (pred, count) in enumerate(prediction_counts.items()):
+                with [col1, col2, col3][i % 3]:
+                    st.metric(pred, count)
+            
+            # Detailed results
+            st.write("Detailed Predictions:")
+            st.dataframe(results[['Prediction', 'Confidence']])
+            
+            # Export functionality
+            col1, col2 = st.columns(2)
+            with col1:
+                csv_buffer = io.StringIO()
+                results.to_csv(csv_buffer, index=False)
+                csv_data = csv_buffer.getvalue()
+                
+                st.download_button(
+                    label="Download Predictions as CSV",
+                    data=csv_data,
+                    file_name=f"exoplanet_predictions_{dataset_key}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                    mime="text/csv"
+                )
+            
+            with col2:
+                # High confidence candidates
+                high_conf_candidates = results[results['Confidence'] > 0.8]
+                if len(high_conf_candidates) > 0:
+                    st.metric("High Confidence Predictions", len(high_conf_candidates))
+                    st.caption("Predictions with >80% confidence")
+            
+            # Confidence distribution
+            fig = px.histogram(
+                results, x='Confidence', color='Prediction',
+                title="Prediction Confidence Distribution",
+                nbins=20
+            )
+            fig.update_layout(showlegend=True)
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # Explainability section (always show if data exists)
+        st.subheader("Explainability (optional)")
+        explain_choice = st.selectbox("Method", ["None", "SHAP", "LIME"], index=0)
+        
+        if explain_choice == "SHAP":
+            if shap is None:
+                st.warning("SHAP not installed. Add it in requirements and reinstall.")
+            else:
+                try:
+                    st.write("**SHAP Analysis**")
+                    st.info("Generating SHAP explanations... This may take a moment.")
+                    
+                    # Use TreeExplainer when available
+                    explainer = shap.TreeExplainer(model) if hasattr(model, 'estimators_') else shap.Explainer(model)
+                    shap_values = explainer(data_scaled)
+                    
+                    st.write("**Global Feature Importance (SHAP):**")
+                    shap.summary_plot(shap_values, data_features, plot_type="bar", show=False)
+                    st.pyplot(plt.gcf())
+                    plt.clf()
+                    
+                    st.write("**SHAP Summary Plot:**")
+                    shap.summary_plot(shap_values, data_features, show=False)
+                    st.pyplot(plt.gcf())
+                    plt.clf()
+                    
+                except Exception as e:
+                    st.error(f"SHAP explanation error: {e}")
+                    st.info("Try installing SHAP: `pip install shap`")
+        
+        elif explain_choice == "LIME":
+            if LimeTabularExplainer is None:
+                st.warning("LIME not installed. Add it in requirements and reinstall.")
+            else:
+                try:
+                    st.write("**LIME Analysis**")
+                    st.info("Generating LIME explanations for the first prediction...")
+                    
+                    explainer = LimeTabularExplainer(
+                        training_data=data_features.values,
+                        feature_names=list(data_features.columns),
+                        class_names=list(label_encoder.classes_),
+                        mode='classification'
+                    )
+                    
+                    # Explain first row as an example
+                    exp = explainer.explain_instance(
+                        data_features.values[0],
+                        model.predict_proba,
+                        num_features=len(data_features.columns)
+                    )
+                    
+                    st.write("**LIME Explanation for First Row:**")
+                    st.components.v1.html(exp.as_html(), height=400, scrolling=True)
+                    
+                    # Show which row is being explained
+                    st.write("**Data being explained:**")
+                    st.dataframe(results.iloc[[0]])
+                    
+                except Exception as e:
+                    st.error(f"LIME explanation error: {e}")
+                    st.info("Try installing LIME: `pip install lime`")
 
 def show_performance_page(metrics, dataset_key, model_type):
     st.header("Model Performance")
@@ -552,7 +648,7 @@ def show_feature_analysis_page(metrics):
         st.write(f"**{feature}**: {description}")
 
 def show_model_comparison_page(dataset_key):
-    st.header("⚖️ Model Comparison")
+    st.header("Model Comparison")
     st.write(f"Compare different ML models on the {dataset_key.upper()} dataset")
     
     # Load metrics for both models
@@ -605,7 +701,7 @@ def show_model_comparison_page(dataset_key):
         st.warning("No model comparison data available. Train models first.")
 
 def show_hyperparameter_tuning_page(dataset_key):
-    st.header("🎛️ Hyperparameter Tuning")
+    st.header("Hyperparameter Tuning")
     st.write("Fine-tune model parameters for optimal performance")
     
     model_choice = st.selectbox("Select Model to Tune", ["Random Forest", "Logistic Regression"])
@@ -623,8 +719,8 @@ def show_hyperparameter_tuning_page(dataset_key):
         
         if st.button("Start Hyperparameter Search"):
             with st.spinner("Running grid search... This may take a few minutes."):
-                st.info("🔄 Hyperparameter tuning simulation started...")
-                st.info("⏱️ In a real implementation, this would:")
+                st.info("Hyperparameter tuning simulation started...")
+                st.info("In a real implementation, this would:")
                 st.write("""
                 1. Load the training data for the selected dataset
                 2. Set up GridSearchCV with the specified parameters
@@ -633,7 +729,7 @@ def show_hyperparameter_tuning_page(dataset_key):
                 """)
                 
                 # Simulate results
-                st.success("✅ Tuning Complete!")
+                st.success("Tuning Complete!")
                 st.write("**Best Parameters Found:**")
                 st.json({
                     "n_estimators": n_estimators,
@@ -656,8 +752,8 @@ def show_hyperparameter_tuning_page(dataset_key):
         
         if st.button("Start Hyperparameter Search"):
             with st.spinner("Running grid search..."):
-                st.info("🔄 Hyperparameter tuning simulation for Logistic Regression...")
-                st.success("✅ Tuning Complete!")
+                st.info("Hyperparameter tuning simulation for Logistic Regression...")
+                st.success("Tuning Complete!")
                 st.write("**Best Parameters Found:**")
                 st.json({
                     "C": C,
@@ -667,10 +763,10 @@ def show_hyperparameter_tuning_page(dataset_key):
                 })
 
 def show_biology_knowledge_page():
-    st.header("🧬 Biology Knowledge Engine")
+    st.header("Biology Knowledge Engine")
     st.write("NASA Space Biology Research Insights")
     
-    st.info("🚀 **Cross-Challenge Integration**: This addresses the 'Build a Space Biology Knowledge Engine' challenge")
+    st.info("Cross-Challenge Integration: This addresses the 'Build a Space Biology Knowledge Engine' challenge")
     
     # Simulated biology knowledge engine
     st.subheader("Space Biology Research Summary")
@@ -717,14 +813,14 @@ def show_biology_knowledge_page():
     st.subheader("Research Search")
     search_query = st.text_input("Search NASA biology publications...")
     if search_query:
-        st.write(f"🔍 Searching for: '{search_query}'")
+        st.write(f"Searching for: '{search_query}'")
         st.info("In a full implementation, this would use AI/NLP to search through NASA's biology publication database")
 
 def show_air_quality_page():
-    st.header("🌍 Air Quality Forecaster")
+    st.header("Air Quality Forecaster")
     st.write("Real-time Air Quality Prediction for Earth")
     
-    st.info("🌱 **Cross-Challenge Integration**: This addresses Earth protection through air quality monitoring")
+    st.info("Cross-Challenge Integration: This addresses Earth protection through air quality monitoring")
     
     # Location selector
     col1, col2 = st.columns(2)
@@ -765,9 +861,9 @@ def show_air_quality_page():
         st.subheader("Health Recommendations")
         avg_aqi = forecast_df['AQI'].mean()
         if avg_aqi < 100:
-            st.success("✅ Air quality is generally good. Safe for outdoor activities.")
+            st.success("Air quality is generally good. Safe for outdoor activities.")
         else:
-            st.warning("⚠️ Moderate air quality expected. Sensitive individuals should limit outdoor exposure.")
+            st.warning("Moderate air quality expected. Sensitive individuals should limit outdoor exposure.")
 
 def show_about_page():
     st.header("About This Project")
