@@ -1,137 +1,157 @@
 # 🪐 NASA Space Apps Exoplanet Detection AI
 
-**Advanced Machine Learning Portal for Automated Exoplanet Discovery**
+**Universal AI-Powered Exoplanet Detection & Analysis Platform**
+
+*Upload Any Astronomical Dataset - We'll Find the Planets*
 
 [![NASA Space Apps 2025](https://img.shields.io/badge/NASA%20Space%20Apps-2025-blue)](https://www.spaceappschallenge.org/2025/challenges/a-world-away-hunting-for-exoplanets-with-ai/)
 [![Python](https://img.shields.io/badge/Python-3.8+-green)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28.0-red)](https://streamlit.io)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![License](https://img.shields.io/badge/License-Open_Source-green)](LICENSE)
 
 ***
 
-## 🎯 Challenge Overview
+## Challenge Overview
 
-This project addresses the **NASA Space Apps 2025 Challenge: "A World Away: Hunting for Exoplanets with AI"** - creating an AI/ML model trained on NASA's open-source exoplanet datasets to automatically analyze new data and accurately identify exoplanets.
+This project addresses the **NASA Space Apps 2025 Challenge: "A World Away: Hunting for Exoplanets with AI"** by creating the first **universal exoplanet analysis platform** that can automatically detect, classify, and analyze exoplanets from any astronomical dataset.
 
-**🏆 Key Achievement**: Fully automated exoplanet detection pipeline with advanced explainability, cross-challenge integration, and professional-grade UI suitable for researchers, educators, and space enthusiasts.
+**Revolutionary Capability**: Scientists can upload **any exoplanet-related dataset** (Kepler, TESS, K2, ground-based observations, or custom data) and our AI will automatically:
+- **Detect data format** and map columns intelligently
+- **Classify exoplanet candidates** with confidence scores
+- **Analyze confirmed planets** for habitability and characteristics  
+- **Generate scientific insights** with publication-ready visualizations
 
-***
-
-## ✨ Features Completed
-
-### 🔬 **Core Exoplanet Detection**
-- ✅ **Multi-Dataset Support**: Kepler, TESS, K2 missions with automatic column mapping
-- ✅ **Advanced ML Models**: Random Forest & Logistic Regression with hyperparameter tuning
-- ✅ **Real-time Predictions**: Upload CSV → Get instant exoplanet classifications
-- ✅ **Model Explainability**: SHAP & LIME integration for interpretable AI
-- ✅ **Performance Analytics**: Confusion matrices, ROC curves, precision/recall metrics
-
-### 📊 **Advanced Visualizations & Analytics**
-- ✅ **Model Comparison Dashboard**: Side-by-side performance evaluation
-- ✅ **Interactive Feature Analysis**: Feature importance with scientific descriptions
-- ✅ **Confidence Scoring**: Prediction reliability assessment
-- ✅ **Export Functionality**: Download predictions as timestamped CSV files
-- ✅ **Cross-Validation Metrics**: Robust model evaluation with statistical confidence
-
-### 🎛️ **Professional Tools**
-- ✅ **Hyperparameter Tuning Interface**: In-app model optimization
-- ✅ **Enhanced Training Pipeline**: Advanced metrics collection for research-grade analysis
-- ✅ **Comprehensive Documentation**: Scientific references, methodology, and usage guides
-- ✅ **Responsive UI**: Professional Streamlit interface with intuitive navigation
-
-### 🌟 **Cross-Challenge Integration**
-- ✅ **🧬 Biology Knowledge Engine**: NASA space biology research dashboard
-- ✅ **🌍 Air Quality Forecaster**: Earth protection through ML-based air quality prediction
-- ✅ **📚 Research Integration**: Comprehensive scientific literature references
+**Perfect for**: Professional astronomers, graduate students, citizen scientists, educators, and space agencies who need quick, reliable exoplanet analysis without manual preprocessing.
 
 ***
 
-## 🚀 Quick Start Guide
+## Features Completed
 
-### **Option 1: Enhanced Setup (Recommended)**
+### **Universal Dataset Analysis**
+- **Smart Data Detection**: Automatically recognizes any exoplanet dataset format
+- **Intelligent Column Mapping**: Maps your columns to standard exoplanet features
+- **Multi-Mission Support**: Kepler, TESS, K2, ground-based, and custom observations
+- **Real-time Analysis**: Upload any CSV → Get instant exoplanet insights
+- **Flexible Analysis Modes**: Candidate classification, habitability analysis, population studies
+
+### **Advanced Visualizations & Analytics**
+- **Model Comparison Dashboard**: Side-by-side performance evaluation
+- **Interactive Feature Analysis**: Feature importance with scientific descriptions
+- **Confidence Scoring**: Prediction reliability assessment
+- **Export Functionality**: Download predictions as timestamped CSV files
+- **Cross-Validation Metrics**: Robust model evaluation with statistical confidence
+
+### **Professional Tools**
+- **Hyperparameter Tuning Interface**: In-app model optimization
+- **Enhanced Training Pipeline**: Advanced metrics collection for research-grade analysis
+- **Comprehensive Documentation**: Scientific references, methodology, and usage guides
+- **Responsive UI**: Professional Streamlit interface with intuitive navigation
+
+### **Cross-Challenge Integration**
+- **Biology Knowledge Engine**: NASA space biology research dashboard
+- **Air Quality Forecaster**: Earth protection through ML-based air quality prediction
+- **Research Integration**: Comprehensive scientific literature references
+
+***
+
+## Quick Start Guide
+
+### **Step 1: Install Dependencies**
 ```bash
-# 1. Clone and setup
-git clone https://github.com/Yamuna-b/nasa-spaceapps-exoplanet.git
-cd nasa-spaceapps-exoplanet
+# Navigate to project directory
+cd c:\Users\yamun\Desktop\Projects\Exoplanets
 
-# 2. Install dependencies
-pip install --upgrade pip setuptools wheel
+# Install required packages (Python 3.8+ required)
 pip install -r requirements.txt
-
-# 3. Run enhanced training (generates advanced metrics)
-python enhanced_training.py
-
-# 4. Launch the application
-streamlit run app.py
 ```
 
-### **Option 2: Basic Setup**
+### **Step 2: Initialize Application**
 ```bash
-# 1-2. Same as above
+# Run setup script (creates database, directories, .env file)
+python setup.py
+```
 
-# 3. Basic preprocessing and training
-python data_preprocessing.py --dataset kepler --input data/kepler_koi.csv --output data/kepler_koi_cleaned.csv
-python train_model.py --dataset kepler --input data/kepler_koi_cleaned.csv
+### **Step 3: Configure (Optional)**
+```bash
+# Edit .env file for real email notifications
+notepad .env
 
-# 4. Launch the application
+# Add your email settings:
+# SMTP_USERNAME=your-email@gmail.com
+# SMTP_PASSWORD=your-app-password
+```
+
+### **Step 4: Launch Application**
+```bash
+# Start the Streamlit application
 streamlit run app.py
 ```
 
-### **🌐 Access the Application**
+**Access:** Open http://localhost:8501 in your browser
+
+### **Features Available:**
+- **Authentication System** - Sign up/Sign in with profile management
+- **Email Verification** - Mock emails (configure SMTP for real emails)
+- **Accessibility Features** - High contrast, large text, screen reader support
+- **Help System** - Interactive tutorials and FAQ
+- **Error Reporting** - Built-in issue reporting system
+- **API Documentation** - Complete reference with examples
+
+### **Access the Application**
 - **Local**: http://localhost:8501
 - **Features Available**: All 8 navigation tabs including cross-challenge integrations
 - **Sample Data**: Built-in sample data for immediate testing
 
 ***
 
-## 📊 Application Navigation
+## Application Navigation
 
-### **🏠 Home & Prediction**
+### **Home & Prediction**
 - Upload CSV files with exoplanet candidate data
 - Real-time predictions with confidence scores
 - Built-in sample data for testing
 - **Export functionality**: Download results as timestamped CSV
 - **Explainability**: SHAP and LIME model interpretations
 
-### **📊 Model Performance** 
+### **Model Performance** 
 - Advanced metrics: Accuracy, Precision, Recall, Cross-validation
 - **Confusion Matrix**: Detailed classification breakdown
 - **ROC Curves**: Multi-class performance visualization
 - **Classification Reports**: Per-class performance statistics
 
-### **🔍 Feature Analysis**
+### **Feature Analysis**
 - Interactive feature importance visualization
 - Scientific descriptions of exoplanet parameters
 - Top 10 most predictive features analysis
 
-### **⚖️ Model Comparison**
+### **Model Comparison**
 - Side-by-side Random Forest vs Logistic Regression comparison
 - Performance metrics visualization
 - Model selection guidance
 
-### **🎛️ Hyperparameter Tuning**
+### **Hyperparameter Tuning**
 - Interactive parameter optimization interface
 - Real-time performance impact simulation
 - Best parameter recommendations
 
-### **🧬 Biology Knowledge Engine** *(Cross-Challenge)*
+### **Biology Knowledge Engine** *(Cross-Challenge)*
 - NASA space biology research dashboard
 - Searchable publication database
 - Key findings from decades of space experiments
 
-### **🌍 Air Quality Forecaster** *(Cross-Challenge)*
+### **Air Quality Forecaster** *(Cross-Challenge)*
 - ML-based air quality predictions
 - Multi-city coverage with health recommendations
 - Real-time environmental monitoring
 
-### **ℹ️ About & References**
+### **About & References**
 - Comprehensive project documentation
 - Scientific methodology and references
 - Technical specifications and usage guides
 
 ***
 
-## 📊 Data Sources & Methodology
+## Data Sources & Methodology
 
 ### **Datasets Supported**
 | Mission | Dataset | Features | Size | Status |

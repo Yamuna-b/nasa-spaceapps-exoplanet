@@ -1,24 +1,35 @@
-# Core
-streamlit==1.28.0
-pandas==2.0.3
-numpy==1.24.4
-scikit-learn==1.3.2
-joblib==1.3.2
+# Exoplanet Detection AI - Requirements (Python 3.12 Compatible)
 
-# Plotting/Data Viz
-matplotlib==3.7.2
-seaborn==0.12.2
-plotly==5.20.0
+# Core Dependencies
+streamlit>=1.28.0
+pandas>=2.1.0
+numpy>=1.26.0
+scikit-learn>=1.3.0
+joblib>=1.3.0
 
-# Packaging/Build Utilities (essential for Windows install/build error-busting)
-pip>=24.0
-setuptools>=69.0
-wheel>=0.43.0
+# Plotting/Data Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.17.0
 
-# Optional extras for explainability (if you add SHAP/LIME for interpretability)
-shap==0.44.1
-lime==0.2.0.1
+# Authentication and Security
+bcrypt>=4.1.0
+PyJWT>=2.8.0
+python-dotenv>=1.0.0
 
-# Optional extras (metrics, utilities)
-scikit-plot==0.3.7
-tqdm==4.66.4
+# OAuth Integration
+authlib>=1.2.0
+requests-oauthlib>=1.3.0
+
+# Additional Dependencies
+requests>=2.31.0
+httpx>=0.28.0
+Pillow>=10.0.0
+openpyxl>=3.1.0
+
+# Explainability Libraries
+shap>=0.44.0
+lime>=0.2.0.1
+
+# Utilities
+tqdm>=4.66.0

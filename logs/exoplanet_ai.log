@@ -1,0 +1,197 @@
+2025-09-20 23:27:00,795 - ExoplanetAI - ERROR - Error 1c9e7095-1495-4c75-bfc5-9d444f13e99f: {
+  "error_id": "1c9e7095-1495-4c75-bfc5-9d444f13e99f",
+  "timestamp": "2025-09-20T23:27:00.703488",
+  "error_type": "AttributeError",
+  "error_message": "st.session_state has no attribute \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 410, in __getitem__\n    return self._getitem(widget_id, key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 455, in _getitem\n    raise KeyError\nKeyError\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 129, in __getattr__\n    return self[key]\n           ~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 100, in __getitem__\n    return get_session_state()[key]\n           ~~~~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\safe_session_state.py\", line 94, in __getitem__\n    return self._state[key]\n           ~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 412, in __getitem__\n    raise KeyError(_missing_key_error_message(key))\nKeyError: 'st.session_state has no key \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 232, in main\n    st.markdown(accessibility_manager.get_accessibility_css(), unsafe_allow_html=True)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\utils\\accessibility.py\", line 78, in get_accessibility_css\n    settings = st.session_state.accessibility_settings\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 131, in __getattr__\n    raise AttributeError(_missing_attr_error_message(key))\nAttributeError: st.session_state has no attribute \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization\n",
+  "user_id": null,
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {}
+}
+2025-09-20 23:27:15,242 - ExoplanetAI - ERROR - Error 5a143239-f881-433d-9b18-e8b8f9bd7733: {
+  "error_id": "5a143239-f881-433d-9b18-e8b8f9bd7733",
+  "timestamp": "2025-09-20T23:27:15.225278",
+  "error_type": "AttributeError",
+  "error_message": "st.session_state has no attribute \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 410, in __getitem__\n    return self._getitem(widget_id, key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 455, in _getitem\n    raise KeyError\nKeyError\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 129, in __getattr__\n    return self[key]\n           ~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 100, in __getitem__\n    return get_session_state()[key]\n           ~~~~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\safe_session_state.py\", line 94, in __getitem__\n    return self._state[key]\n           ~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 412, in __getitem__\n    raise KeyError(_missing_key_error_message(key))\nKeyError: 'st.session_state has no key \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 232, in main\n    st.markdown(accessibility_manager.get_accessibility_css(), unsafe_allow_html=True)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\utils\\accessibility.py\", line 78, in get_accessibility_css\n    settings = st.session_state.accessibility_settings\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 131, in __getattr__\n    raise AttributeError(_missing_attr_error_message(key))\nAttributeError: st.session_state has no attribute \"accessibility_settings\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization\n",
+  "user_id": null,
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {}
+}
+2025-09-21 00:08:24,549 - ExoplanetAI - ERROR - Error 2895a6f6-2604-4997-88f1-548c27c58746: {
+  "error_id": "2895a6f6-2604-4997-88f1-548c27c58746",
+  "timestamp": "2025-09-21T00:08:24.449644",
+  "error_type": "ParserError",
+  "error_message": "Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 365, in main\n    show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_key)\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 441, in show_prediction_page\n    data = pd.read_csv(uploaded_file)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1026, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 626, in _read\n    return parser.read(nrows)\n           ^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1923, in read\n    ) = self._engine.read(  # type: ignore[attr-defined]\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\c_parser_wrapper.py\", line 234, in read\n    chunks = self._reader.read_low_memory(nrows)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"parsers.pyx\", line 838, in pandas._libs.parsers.TextReader.read_low_memory\n  File \"parsers.pyx\", line 905, in pandas._libs.parsers.TextReader._read_rows\n  File \"parsers.pyx\", line 874, in pandas._libs.parsers.TextReader._tokenize_rows\n  File \"parsers.pyx\", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status\n  File \"parsers.pyx\", line 2061, in pandas._libs.parsers.raise_parser_error\npandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n\n",
+  "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {
+    "session_token": "[REDACTED]",
+    "scaled_data": "<class 'numpy.ndarray'>",
+    "prediction_data": "<class 'pandas.core.frame.DataFrame'>",
+    "sample_data": "<class 'pandas.core.frame.DataFrame'>",
+    "accessibility_settings": {
+      "high_contrast": false,
+      "large_text": false,
+      "reduced_motion": false,
+      "screen_reader_mode": false,
+      "keyboard_navigation": true,
+      "alt_text_enabled": true
+    },
+    "prediction_results": "<class 'pandas.core.frame.DataFrame'>",
+    "processed_features": "<class 'pandas.core.frame.DataFrame'>",
+    "show_issue_form": false,
+    "user": {
+      "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+      "email": "yamu@gmail.com",
+      "password_hash": "$2b$12$BXv/632RqNoXb81Hqr/AYOmrbj.9k9SSnE3uw3i9NV5V7dYkzp8wS",
+      "name": "Yamu",
+      "bio": null,
+      "institution": null,
+      "research_interests": null,
+      "is_verified": 0,
+      "verification_token": "aa275acc-b24a-41bd-a757-e43ef6b73893",
+      "reset_token": null,
+      "reset_token_expires": null,
+      "google_id": null,
+      "github_id": null,
+      "profile_picture_url": null,
+      "created_at": "2025-09-20 17:02:08",
+      "last_login": "2025-09-20 18:23:55",
+      "is_active": 1,
+      "preferences": "{}"
+    },
+    "auth_mode": "signin",
+    "authenticated": true
+  }
+}
+2025-09-21 00:11:28,268 - ExoplanetAI - ERROR - Error aa09a2dd-9940-4301-9c18-8050263ff5f6: {
+  "error_id": "aa09a2dd-9940-4301-9c18-8050263ff5f6",
+  "timestamp": "2025-09-21T00:11:28.266539",
+  "error_type": "ParserError",
+  "error_message": "Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 413, in main\n    show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_key)\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 489, in show_prediction_page\n    data = pd.read_csv(uploaded_file)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1026, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 626, in _read\n    return parser.read(nrows)\n           ^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1923, in read\n    ) = self._engine.read(  # type: ignore[attr-defined]\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\c_parser_wrapper.py\", line 234, in read\n    chunks = self._reader.read_low_memory(nrows)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"parsers.pyx\", line 838, in pandas._libs.parsers.TextReader.read_low_memory\n  File \"parsers.pyx\", line 905, in pandas._libs.parsers.TextReader._read_rows\n  File \"parsers.pyx\", line 874, in pandas._libs.parsers.TextReader._tokenize_rows\n  File \"parsers.pyx\", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status\n  File \"parsers.pyx\", line 2061, in pandas._libs.parsers.raise_parser_error\npandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n\n",
+  "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {
+    "session_token": "[REDACTED]",
+    "scaled_data": "<class 'numpy.ndarray'>",
+    "prediction_data": "<class 'pandas.core.frame.DataFrame'>",
+    "sample_data": "<class 'pandas.core.frame.DataFrame'>",
+    "accessibility_settings": {
+      "high_contrast": false,
+      "large_text": false,
+      "reduced_motion": false,
+      "screen_reader_mode": false,
+      "keyboard_navigation": true,
+      "alt_text_enabled": true
+    },
+    "prediction_results": "<class 'pandas.core.frame.DataFrame'>",
+    "processed_features": "<class 'pandas.core.frame.DataFrame'>",
+    "show_issue_form": false,
+    "user": {
+      "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+      "email": "yamu@gmail.com",
+      "password_hash": "$2b$12$BXv/632RqNoXb81Hqr/AYOmrbj.9k9SSnE3uw3i9NV5V7dYkzp8wS",
+      "name": "Yamu",
+      "bio": null,
+      "institution": null,
+      "research_interests": null,
+      "is_verified": 0,
+      "verification_token": "aa275acc-b24a-41bd-a757-e43ef6b73893",
+      "reset_token": null,
+      "reset_token_expires": null,
+      "google_id": null,
+      "github_id": null,
+      "profile_picture_url": null,
+      "created_at": "2025-09-20 17:02:08",
+      "last_login": "2025-09-20 18:23:55",
+      "is_active": 1,
+      "preferences": "{}"
+    },
+    "auth_mode": "signin",
+    "authenticated": true,
+    "report_2895a6f6-2604-4997-88f1-548c27c58746": false
+  }
+}
+2025-09-21 00:11:31,657 - ExoplanetAI - ERROR - Error 87c7ad2e-c80e-45ca-9f62-0f814a740f57: {
+  "error_id": "87c7ad2e-c80e-45ca-9f62-0f814a740f57",
+  "timestamp": "2025-09-21T00:11:31.643388",
+  "error_type": "AttributeError",
+  "error_message": "st.session_state has no attribute \"authenticated\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 410, in __getitem__\n    return self._getitem(widget_id, key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 455, in _getitem\n    raise KeyError\nKeyError\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 129, in __getattr__\n    return self[key]\n           ~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 100, in __getitem__\n    return get_session_state()[key]\n           ~~~~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\safe_session_state.py\", line 94, in __getitem__\n    return self._state[key]\n           ~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state.py\", line 412, in __getitem__\n    raise KeyError(_missing_key_error_message(key))\nKeyError: 'st.session_state has no key \"authenticated\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 345, in main\n    if not auth_interface.check_authentication():\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\auth\\auth_interface.py\", line 523, in check_authentication\n    if not st.session_state.authenticated:\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\streamlit\\runtime\\state\\session_state_proxy.py\", line 131, in __getattr__\n    raise AttributeError(_missing_attr_error_message(key))\nAttributeError: st.session_state has no attribute \"authenticated\". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization\n",
+  "user_id": null,
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {
+    "accessibility_settings": {
+      "high_contrast": false,
+      "large_text": false,
+      "reduced_motion": false,
+      "screen_reader_mode": false,
+      "keyboard_navigation": true,
+      "alt_text_enabled": true
+    },
+    "show_issue_form": false
+  }
+}
+2025-09-21 00:21:02,893 - ExoplanetAI - ERROR - Error 1d4505d4-fcc7-456c-87bb-f92e4bd318f1: {
+  "error_id": "1d4505d4-fcc7-456c-87bb-f92e4bd318f1",
+  "timestamp": "2025-09-21T00:21:02.890701",
+  "error_type": "ParserError",
+  "error_message": "Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 413, in main\n    show_prediction_page(model, label_encoder, feature_scaler, metrics, dataset_key)\n  File \"C:\\Users\\yamun\\Desktop\\Projects\\Exoplanets\\app.py\", line 507, in show_prediction_page\n    data = pd.read_csv(uploaded_file)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1026, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 626, in _read\n    return parser.read(nrows)\n           ^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py\", line 1923, in read\n    ) = self._engine.read(  # type: ignore[attr-defined]\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yamun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pandas\\io\\parsers\\c_parser_wrapper.py\", line 234, in read\n    chunks = self._reader.read_low_memory(nrows)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"parsers.pyx\", line 838, in pandas._libs.parsers.TextReader.read_low_memory\n  File \"parsers.pyx\", line 905, in pandas._libs.parsers.TextReader._read_rows\n  File \"parsers.pyx\", line 874, in pandas._libs.parsers.TextReader._tokenize_rows\n  File \"parsers.pyx\", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status\n  File \"parsers.pyx\", line 2061, in pandas._libs.parsers.raise_parser_error\npandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 97, saw 92\n\n",
+  "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+  "context": {
+    "page": "main_app"
+  },
+  "session_state": {
+    "session_token": "[REDACTED]",
+    "scaled_data": "<class 'numpy.ndarray'>",
+    "prediction_data": "<class 'pandas.core.frame.DataFrame'>",
+    "sample_data": "<class 'pandas.core.frame.DataFrame'>",
+    "accessibility_settings": {
+      "high_contrast": false,
+      "large_text": false,
+      "reduced_motion": false,
+      "screen_reader_mode": false,
+      "keyboard_navigation": true,
+      "alt_text_enabled": true
+    },
+    "prediction_results": "<class 'pandas.core.frame.DataFrame'>",
+    "processed_features": "<class 'pandas.core.frame.DataFrame'>",
+    "show_issue_form": false,
+    "user": {
+      "user_id": "1d0a95de-3b77-472b-a678-dd320f0b7dbc",
+      "email": "yamu@gmail.com",
+      "password_hash": "$2b$12$BXv/632RqNoXb81Hqr/AYOmrbj.9k9SSnE3uw3i9NV5V7dYkzp8wS",
+      "name": "Yamu",
+      "bio": null,
+      "institution": null,
+      "research_interests": null,
+      "is_verified": 0,
+      "verification_token": "aa275acc-b24a-41bd-a757-e43ef6b73893",
+      "reset_token": null,
+      "reset_token_expires": null,
+      "google_id": null,
+      "github_id": null,
+      "profile_picture_url": null,
+      "created_at": "2025-09-20 17:02:08",
+      "last_login": "2025-09-20 18:30:11",
+      "is_active": 1,
+      "preferences": "{}"
+    },
+    "auth_mode": "signin",
+    "authenticated": true
+  }
+}
